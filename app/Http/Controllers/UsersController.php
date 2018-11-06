@@ -6,9 +6,16 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
 use App\Handlers\ImageUploadHandler;
+use MongoDB\Driver\Exception\AuthenticationException;
 
 class UsersController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['except'=>['show']]);
+    }
+
     public function show(User $user)
     {
         return view('users.show', compact('user'));
@@ -16,11 +23,21 @@ class UsersController extends Controller
 
     public function edit(User $user)
     {
+        try {
+            $this->authorize('update', $user);
+        } catch (AuthenticationException $e) {
+            abort(403, $exception->getMessage());
+        }
         return view('users.edit', compact('user'));
     }
 
     public function update(UserRequest $request, ImageUploadHandler $uploader, User $user)
     {
+        try {
+            $this->authorize('update', $user);
+        } catch (AuthenticationException $e) {
+            abort(403, $exception->getMessage());
+        }
         $data = $request->all();
 
         if ($request->avatar) {
