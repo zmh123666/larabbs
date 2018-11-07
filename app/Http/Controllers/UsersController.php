@@ -25,7 +25,7 @@ class UsersController extends Controller
     {
         try {
             $this->authorize('update', $user);
-        } catch (AuthenticationException $e) {
+        } catch (AuthenticationException $exception) {
             abort(403, $exception->getMessage());
         }
         return view('users.edit', compact('user'));
@@ -35,7 +35,7 @@ class UsersController extends Controller
     {
         try {
             $this->authorize('update', $user);
-        } catch (AuthenticationException $e) {
+        } catch (AuthenticationException $exception) {
             abort(403, $exception->getMessage());
         }
         $data = $request->all();
