@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'laralBBS') - Laravel 进阶教程</title>
     <link rel="stylesheet"  href="/css/app.css">
+    @yield('styles')
 
 </head>
 
@@ -23,5 +24,7 @@
     </div>
 
     <script src="{{ asset('js/app.js') }}"></script>
+    @yield('scripts')
+
 </body>
 </html>
