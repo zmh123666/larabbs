@@ -13,10 +13,10 @@
      {{ if_query('order','recent') ? $topic->created_at->diffForHumans().'发布' : $topic->updated_at->diffForHumans().'回复' }}
 </span>
                     <div class="media-heading">
-                        <a href="{{ route('topics.show', [$topic->id]) }}">
+                        <a href="{{ $topic->link() }}">
                             {{ $topic->title }}
                         </a>
-                        <a class="pull-right" href="{{ route('topics.show', [$topic->id]) }}">
+                        <a class="pull-right" href="{{ $topic->link() }}">
                             <span class="badge">{{ $topic->reply_count }} </span>
                         </a>
                     </div>
