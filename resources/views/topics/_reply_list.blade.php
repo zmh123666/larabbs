@@ -40,3 +40,4 @@
     @endforeach
 
 </div>
+{!! $replies->appends(Request::except('page'))->render() !!}
